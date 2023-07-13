@@ -1,0 +1,15 @@
+services:
+  mail:
+    image: "mailhog/mailhog:v1.0.1"
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+  db:
+    image: "mcr.microsoft.com/azure-sql-edge:latest"
+    environment:
+      - "ACCEPT_EULA=1"
+    env_file:
+      - ".env"
+    ports:
+      - "1433:1433"
+

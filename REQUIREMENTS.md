@@ -23,11 +23,11 @@
 
 ### Setup Docker Services
 
-* A docker compose file exists which starts []
-    * An Azure SQL Database []
-    * A Mailhog SMTP Server []
-* A simple command exists to start + stop the services []
-* How to start and stop the services is documented []
+* A docker compose file exists which starts [X]
+    * An Azure SQL Database [X]
+    * A Mailhog SMTP Server [X]
+* How to start and stop the services is documented [X]
+* The Azure SQL Database has persistent storage []
 
 ### Create an Azure SQL Database
 
