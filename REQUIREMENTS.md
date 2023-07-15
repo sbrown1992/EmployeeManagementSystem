@@ -31,22 +31,20 @@
 
 ### Create an Azure SQL Database
 
-* All of the following happens via automation []
-* An Employee Table has been setup []
-    * ID (Primary Key, automatically increments, not null) []
-    * First Name []
-    * Last Name []
-    * Username []
-    * Password []
-    * Email []
-    * Date of Birth []
-    * DepartmentID (Foreign key to Department Table) []
-    * Position []
-* A Department Table has been setup []
-    * ID (Primary Key, automatically increments, not null) []
-    * Name []
-* How to manage the database is documented []
-* A sample set of testdata exists []
+* Both of the following happen via automation [X]
+* An Employee Table has been setup [X]
+    * ID (Primary Key, automatically increments, not null) [X]
+    * First Name [X]
+    * Last Name [X]
+    * Username [X]
+    * Password [X]
+    * Email [X]
+    * Date of Birth [X]
+    * DepartmentID (Foreign key to Department Table) [X]
+    * Position [X]
+* A Department Table has been setup [X]
+    * ID (Primary Key, automatically increments, not null) [X]
+    * Name [X]
 
 ### Create an Employee GraphQL Schema
 
