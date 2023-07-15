@@ -1,25 +1,26 @@
 CREATE SCHEMA EMS
 
-CREATE TABLE EMS.Department
+CREATE TABLE EMS.department
 (
-    ID int NOT NULL IDENTITY(1,1),
-    Name varchar(255)
+    id int NOT NULL IDENTITY(1,1),
+    name varchar(255)
     
     CONSTRAINT PK_Department PRIMARY KEY (ID)
 )
 
-CREATE TABLE EMS.Employee
+CREATE TABLE EMS.employee
 (
-    ID int NOT NULL IDENTITY(1,1),
-    FirstName varchar(255),
-    LastName varchar(255),
-    Username varchar(255), 
-    Password varchar(255),
-    Email varchar(255),
-    DepartmentID int,
-    Position varchar(255),
+    id int NOT NULL IDENTITY(1,1),
+    first_name varchar(255),
+    last_name varchar(255),
+    username varchar(255), 
+    password varchar(255),
+    email varchar(255),
+    dob date,
+    department_id int,
+    position varchar(255),
 
-    CONSTRAINT PK_Employee PRIMARY KEY (ID),
-    CONSTRAINT FK_EmployeeDepartment FOREIGN KEY (DepartmentID)
-    REFERENCES Department(ID)
+    CONSTRAINT PK_Employee PRIMARY KEY (id),
+    CONSTRAINT FK_EmployeeDepartment FOREIGN KEY (department_id)
+    REFERENCES department(id)
 )

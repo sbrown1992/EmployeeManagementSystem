@@ -1,45 +1,49 @@
 package db
 
 import (
-	"context"
-	"database/sql"
 	"fmt"
 	"os"
+	"path/filepath"
 
 	_ "github.com/microsoft/go-mssqldb"
+	"gorm.io/driver/sqlserver"
+	"gorm.io/gorm"
 )
 
 type DB struct {
-	conn *sql.DB
+	conn        *gorm.DB
+	scriptsPath string
 }
 
 func Connect(server string, port int, user, password, database string) (*DB, error) {
 	connString := fmt.Sprintf("server=%s;user id = %s;password=%s;port=%d;database=%s;",
 		server, user, password, port, database)
-
-	conn, err := sql.Open("sqlserver", connString)
-	if err != nil {
-		return nil, err
-	}
-	ctx := context.Background()
-
-	err = conn.PingContext(ctx)
+	conn, err := gorm.Open(sqlserver.Open(connString), &gorm.Config{})
 	if err != nil {
 		return nil, err
 	}
 
 	db := &DB{
-		conn: conn,
+		conn:        conn,
+		scriptsPath: "../db_scripts",
 	}
 	return db, nil
 }
 
+func (db *DB) ResetDB() error {
+	err := db.CleanDB()
+	if err != nil {
+		return err
+	}
+	return db.SetupDB()
+}
+
 func (db *DB) CleanDB() error {
-	return db.runSQLScript("db_scripts/clean.sql")
+	return db.runSQLScript(filepath.Join(db.scriptsPath, "clean.sql"))
 }
 
 func (db *DB) SetupDB() error {
-	return db.runSQLScript("db_scripts/setup.sql")
+	return db.runSQLScript(filepath.Join(db.scriptsPath, "setup.sql"))
 }
 
 func (db *DB) runSQLScript(filename string) error {
@@ -49,9 +53,10 @@ func (db *DB) runSQLScript(filename string) error {
 	}
 
 	query := string(queryBytes)
-	_, err = db.conn.Exec(query)
-	if err != nil {
-		return err
-	}
+	db.conn.Exec(query)
 	return nil
+}
+
+func (db *DB) SetScriptsPath(path string) {
+	db.scriptsPath = path
 }

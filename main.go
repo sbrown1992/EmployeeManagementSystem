@@ -23,14 +23,14 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+	conn.SetScriptsPath("./db_scripts")
 
-	// TODO move these elsewhere
-	err = db.CleanDB(conn)
+	err = conn.CleanDB()
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	err = db.SetupDB(conn)
+	err = conn.SetupDB()
 	if err != nil {
 		log.Fatal(err)
 	}
